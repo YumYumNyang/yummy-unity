@@ -4,6 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private KeyCode jumpKeyCode = KeyCode.Space;
+    [SerializeField]
+    private CameraController cameraController;
     private Movement3D movement3D;
 
     private void Awake()
@@ -22,5 +24,10 @@ public class PlayerController : MonoBehaviour
       {
         movement3D.JumpTo();
       } 
+
+      float mouseX = Input.GetAxis("Mouse X");
+      float mouseY = Input.GetAxis("Mouse Y");
+
+      cameraController.RotateTo(mouseX, mouseY);
     }
 }

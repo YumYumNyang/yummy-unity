@@ -12,7 +12,18 @@ public class CameraController : MonoBehaviour
    
     public void RotateTo(float mouseX, float mouseY)
     {
-      eulerAngleX += mouseX + rotateSpeedX;
-      eulerAngleX -= mouseY 
+      eulerAngleY += mouseX * rotateSpeedX;
+      eulerAngleX -= mouseY * rotateSpeedY;
+      eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX);
+      transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
+    }
+
+    private float ClampAngle(float angle, float min, float max)
+    {
+      if(angle < -360) angle += 360;
+      if(angle > 360) angle -= 360;
+
+      return Mathf.Clamp(angle, min, max);
+
     }
 }

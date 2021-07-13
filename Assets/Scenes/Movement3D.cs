@@ -9,6 +9,8 @@ public class Movement3D : MonoBehaviour
     private float gravity = -9.8f;
     private Vector3 moveDirection;
 
+    [SerializeField]
+    private Transform cameraTransform;
     private CharacterController characterController;
 
     private void Awake()
@@ -26,7 +28,8 @@ public class Movement3D : MonoBehaviour
 
     public void MoveTo(Vector3 direction)
     {
-      moveDirection = new Vector3(direction.x, moveDirection.y, direction.z);
+      Vector3 movedis = cameraTransform.rotation * direction;
+      moveDirection = new Vector3(movedis.x, moveDirection.y, movedis.z);
     }
     
     public void JumpTo()
